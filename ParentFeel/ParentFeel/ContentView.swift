@@ -14,7 +14,7 @@ struct ContentView: View {
                 ForEach(emotions) { emotion in
                     NavigationLink {
                         VStack(alignment: .leading) {
-                            Text("Emotion: \(emotion.emotionType)")
+                            Text("Emotion: \(emotion.emotionType.displayText)")
                             Text("Child Actions: \(emotion.childActions.joined(separator: ", "))")
                             Text("Parent Actions: \(emotion.parentActions.joined(separator: ", "))")
                             Text("Notes: \(emotion.notes)")
@@ -22,7 +22,7 @@ struct ContentView: View {
                         }
                     } label: {
                         HStack {
-                            Text(emotion.emotionType)
+                            Text(emotion.emotionType.displayText)
                             Spacer()
                             Text(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
                         }

@@ -4,29 +4,39 @@ import SwiftData
 struct EmotionInputView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedEmotion: String = ""
+    @State private var selectedEmotion: EmotionType = .affection
     @State private var selectedChildActions: Set<String> = []
     @State private var selectedParentActions: Set<String> = []
     @State private var notes: String = ""
 
-    let emotions = ["Happy", "Sad", "Angry", "Surprised"]
+    // let emotions = EmotionType.allCases
+    let categories = EmotionCategory.allCases
     let childActions = ["Crying", "Laughing", "Playing"]
     let parentActions = ["Comforting", "Scolding", "Playing"]
 
     var body: some View {
         VStack {
             ScrollView {
-                HStack {
-                    ForEach(emotions, id: \.self) { emotion in
-                        Button(action: {
-                            selectedEmotion = emotion
-                        }) {
-                            Text(emotion)
-                                .padding()
-                                .background(selectedEmotion == emotion ? Color.blue : Color.gray)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
+                VStack {
+                    ForEach(categories) { category in
+                        VStack(alignment: .leading) {
+                        Text(category.rawValue)
+                            .font(.headline)
+                        HStack {
+                            ForEach(category.emotions) { emotion in
+                                Button(action: {
+                                    selectedEmotion = emotion
+                                }) {
+                                    Text(emotion.displayText)
+                                        .padding()
+                                        .background(selectedEmotion == emotion ? Color.blue : Color.gray)
+                                        .foregroundColor(.white)
+                                        .clipShape(Circle())
+                                }
+                            }
                         }
+                    }
+                    .padding()
                     }
                 }
                 .padding()
@@ -94,7 +104,7 @@ struct EmotionInputView: View {
             notes: notes
         )
         modelContext.insert(newEmotion)
-        print("Emotion saved: \(newEmotion.emotionType)")
+        print("Emotion saved: \(newEmotion.emotionType.rawValue)")
         dismiss()
     }
 }
