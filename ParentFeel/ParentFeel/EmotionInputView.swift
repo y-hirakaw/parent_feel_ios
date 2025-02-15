@@ -8,12 +8,12 @@ struct EmotionInputView: View {
     @State private var selectedChildActions: Set<ChildActionType> = []
     @State private var selectedParentActions: Set<ParentActionType> = []
     @State private var notes: String = ""
+    @State private var isChildActionModalPresented = false
+    @State private var isParentActionModalPresented = false
 
     let categories = EmotionCategory.allCases
-    let childActions = ["Crying", "Laughing", "Playing"]
-    let parentActions = ["Comforting", "Scolding", "Playing"]
 
-        var body: some View {
+    var body: some View {
         VStack {
             ScrollView {
                 VStack(spacing: 16) {
@@ -23,7 +23,7 @@ struct EmotionInputView: View {
                     ForEach(categories) { category in
                         VStack(alignment: .leading) {
                             Text(category.rawValue)
-                                .font(.headline)
+                                .font(.subheadline)
                                 .padding(.horizontal)
 
                             LazyHGrid(rows: [GridItem(.fixed(80))], spacing: 16) {
@@ -58,10 +58,47 @@ struct EmotionInputView: View {
                 }
 
                 // 子どもの行動選択
-                Text("子どもの行動(任意)")
+                VStack(spacing: 8) {
+                    Text("子どもの行動(任意)")
+                        .font(.headline)
+                    Button("選択する") {
+                        isChildActionModalPresented = true
+                    }
+                    .padding(10)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(20)
+                    .shadow(radius: 2)
+                    .sheet(isPresented: $isChildActionModalPresented) {
+                        ActionSelectionView(selectedActions: $selectedChildActions)
+                    }
+                    Text(selectedChildActions.map { $0.displayText }.joined(separator: ", "))
+                        .font(.caption)
+                }
+                .padding(.vertical, 8)
 
                 // 自分の行動選択
-                Text("自分の行動(任意)")
+                VStack(spacing: 8) {
+                    Text("自分の行動(任意)")
+                        .font(.headline)
+                    Button("選択する") {
+                        isParentActionModalPresented = true
+                    }
+                    .padding(10)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(20)
+                    .shadow(radius: 2)
+                    .sheet(isPresented: $isParentActionModalPresented) {
+                        ActionSelectionView(selectedActions: $selectedParentActions)
+                    }
+                    Text(selectedParentActions.map { $0.displayText }.joined(separator: ", "))
+                        .font(.caption)
+                }
+                .padding(.vertical, 8)
+
 
                 // メモ欄
                 VStack(alignment: .leading) {
@@ -70,7 +107,7 @@ struct EmotionInputView: View {
                         .padding(.horizontal)
 
                     ZStack(alignment: .topLeading) {
-                        if notes.isEmpty {
+                        if (notes.isEmpty) {
                             Text("ここにメモを入力")
                                 .foregroundColor(.gray)
                                 .padding(10)
@@ -104,8 +141,9 @@ struct EmotionInputView: View {
     private func saveEmotion() {
         let newEmotion = Emotion(
             emotionType: selectedEmotion,
-            childActions: Array(selectedChildActions),
-            parentActions: Array(selectedParentActions),
+            childActions: selectedChildActions.compactMap { ChildActionType(rawValue: $0.rawValue) },
+            parentActions: selectedParentActions
+                .compactMap { ParentActionType(rawValue: $0.rawValue) },
             notes: notes
         )
         modelContext.insert(newEmotion)

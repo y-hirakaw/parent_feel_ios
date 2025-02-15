@@ -1,6 +1,6 @@
 import Foundation
 
-enum ParentActionType: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
+enum ParentActionType: Int, ActionType, CaseIterable, Identifiable, RawRepresentable, Codable {
     case scolding       // 叱る
     case ignoring       // 無視する
     case explaining     // 説明する
@@ -19,6 +19,11 @@ enum ParentActionType: Int, CaseIterable, Identifiable, RawRepresentable, Codabl
     case changingTopic  // 話題を変える
     case consulting     // 誰かに相談する
     case gettingSilent  // 黙る
+    case encouraging      // 励ます
+    case listening        // 話を聞く
+    case appreciating     // 感謝を伝える
+    case supporting       // サポートする
+    case playingTogether  // 一緒に遊ぶ
 
     var id: String { String(self.rawValue) }
 
@@ -42,6 +47,11 @@ enum ParentActionType: Int, CaseIterable, Identifiable, RawRepresentable, Codabl
         case .changingTopic: return "話題を変える"
         case .consulting: return "誰かに相談する"
         case .gettingSilent: return "黙る"
+        case .encouraging: return "励ます"
+        case .listening: return "話を聞く"
+        case .appreciating: return "感謝を伝える"
+        case .supporting: return "サポートする"
+        case .playingTogether: return "一緒に遊ぶ"
         }
     }
 }
