@@ -1,7 +1,10 @@
 import SwiftUI
 import SwiftData
+import Inject
 
 struct ContentView: View {
+@ObserveInjection var inject
+
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
@@ -30,6 +33,7 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+        .enableInjection()
     }
 
     private func addItem() {
