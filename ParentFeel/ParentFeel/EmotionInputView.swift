@@ -20,23 +20,28 @@ struct EmotionInputView: View {
                 VStack {
                     ForEach(categories) { category in
                         VStack(alignment: .leading) {
-                        Text(category.rawValue)
-                            .font(.headline)
-                        HStack {
-                            ForEach(category.emotions) { emotion in
-                                Button(action: {
-                                    selectedEmotion = emotion
-                                }) {
-                                    Text(emotion.displayText)
+                            Text(category.rawValue)
+                                .font(.headline)
+                            HStack {
+                                ForEach(category.emotions) { emotion in
+                                    Button(action: {
+                                        selectedEmotion = emotion
+                                    }) {
+                                        VStack {
+                                            Text(emotion.emoji)
+                                                .font(.largeTitle)
+                                            Text(emotion.displayText)
+                                                .font(.caption)
+                                        }
                                         .padding()
                                         .background(selectedEmotion == emotion ? Color.blue : Color.gray)
                                         .foregroundColor(.white)
                                         .clipShape(Circle())
+                                    }
                                 }
                             }
                         }
-                    }
-                    .padding()
+                        .padding()
                     }
                 }
                 .padding()

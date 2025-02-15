@@ -102,6 +102,47 @@ enum EmotionType: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
             return "寂しさ"
         }
     }
+
+    var emoji: String {
+        switch self {
+        case .affection:
+            return "❤️"
+        case .joy:
+            return "😊"
+        case .pride:
+            return "😌"
+        case .anger:
+            return "😠"
+        case .sadness:
+            return "😢"
+        case .disappointment:
+            return "😞"
+        case .anxiety:
+            return "😟"
+        case .worry:
+            return "😰"
+        case .fear:
+            return "😨"
+        case .guilt:
+            return "😔"
+        case .regret:
+            return "😣"
+        case .impatience:
+            return "😤"
+        case .hope:
+            return "🤞"
+        case .expectation:
+            return "😯"
+        case .excitement:
+            return "😃"
+        case .jealousy:
+            return "😒"
+        case .confusion:
+            return "😕"
+        case .loneliness:
+            return "😞"
+        }
+    }
 }
 
 @Model
