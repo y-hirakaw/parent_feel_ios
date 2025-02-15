@@ -5,24 +5,28 @@ struct EmotionInputView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @State private var selectedEmotion: EmotionType = .affection
-    @State private var selectedChildActions: Set<String> = []
-    @State private var selectedParentActions: Set<String> = []
+    @State private var selectedChildActions: Set<ChildActionType> = []
+    @State private var selectedParentActions: Set<ParentActionType> = []
     @State private var notes: String = ""
 
-    // let emotions = EmotionType.allCases
     let categories = EmotionCategory.allCases
     let childActions = ["Crying", "Laughing", "Playing"]
     let parentActions = ["Comforting", "Scolding", "Playing"]
 
-    var body: some View {
+        var body: some View {
         VStack {
             ScrollView {
-                VStack {
+                VStack(spacing: 16) {
+                    Text("起きた感情")
+                        .font(.headline)
+                        .padding(.horizontal)
                     ForEach(categories) { category in
                         VStack(alignment: .leading) {
                             Text(category.rawValue)
                                 .font(.headline)
-                            HStack {
+                                .padding(.horizontal)
+
+                            LazyHGrid(rows: [GridItem(.fixed(80))], spacing: 16) {
                                 ForEach(category.emotions) { emotion in
                                     Button(action: {
                                         selectedEmotion = emotion
@@ -30,72 +34,68 @@ struct EmotionInputView: View {
                                         VStack {
                                             Text(emotion.emoji)
                                                 .font(.largeTitle)
+                                                .padding(12)
+                                                .background(selectedEmotion == emotion ? Color.blue.opacity(0.8) : Color.gray.opacity(0.3))
+                                                .foregroundColor(.white)
+                                                .clipShape(Circle())
+                                                .overlay(
+                                                    Circle()
+                                                        .stroke(selectedEmotion == emotion ? Color.blue : Color.clear, lineWidth: 3)
+                                                )
+                                                .scaleEffect(selectedEmotion == emotion ? 1.1 : 1.0)
+                                                .animation(.spring(), value: selectedEmotion)
+
                                             Text(emotion.displayText)
                                                 .font(.caption)
+                                                .foregroundColor(selectedEmotion == emotion ? .blue : .black)
                                         }
-                                        .padding()
-                                        .background(selectedEmotion == emotion ? Color.blue : Color.gray)
-                                        .foregroundColor(.white)
-                                        .clipShape(Circle())
                                     }
                                 }
                             }
+                            .padding(.horizontal)
                         }
-                        .padding()
                     }
                 }
-                .padding()
 
+                // 子どもの行動選択
+                Text("子どもの行動(任意)")
+
+                // 自分の行動選択
+                Text("自分の行動(任意)")
+
+                // メモ欄
                 VStack(alignment: .leading) {
-                    Text("子どもの行動")
-                    ForEach(childActions, id: \.self) { action in
-                        Toggle(action, isOn: Binding(
-                            get: { selectedChildActions.contains(action) },
-                            set: { isSelected in
-                                if isSelected {
-                                    selectedChildActions.insert(action)
-                                } else {
-                                    selectedChildActions.remove(action)
-                                }
-                            }
-                        ))
+                    Text("メモ(任意)")
+                        .font(.headline)
+                        .padding(.horizontal)
+
+                    ZStack(alignment: .topLeading) {
+                        if notes.isEmpty {
+                            Text("ここにメモを入力")
+                                .foregroundColor(.gray)
+                                .padding(10)
+                        }
+
+                        TextEditor(text: $notes)
+                            .frame(height: 100)
+                            .padding(10)
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(8)
                     }
+                    .padding(.horizontal)
                 }
-                .padding()
-
-                VStack(alignment: .leading) {
-                    Text("自分の行動")
-                    ForEach(parentActions, id: \.self) { action in
-                        Toggle(action, isOn: Binding(
-                            get: { selectedParentActions.contains(action) },
-                            set: { isSelected in
-                                if isSelected {
-                                    selectedParentActions.insert(action)
-                                } else {
-                                    selectedParentActions.remove(action)
-                                }
-                            }
-                        ))
-                    }
-                }
-                .padding()
-
-                VStack(alignment: .leading) {
-                    Text("メモ")
-                    TextEditor(text: $notes)
-                        .frame(height: 100)
-                        .border(Color.gray)
-                }
-                .padding()
             }
 
+            // 保存ボタン
             Button(action: saveEmotion) {
                 Text("保存")
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.blue)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .font(.headline)
+                    .cornerRadius(20)
+                    .shadow(radius: 2)
             }
             .padding()
         }

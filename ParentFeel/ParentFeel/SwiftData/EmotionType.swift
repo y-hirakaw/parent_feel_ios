@@ -1,4 +1,3 @@
-import SwiftData
 import Foundation
 
 enum EmotionCategory: String, CaseIterable, Identifiable, RawRepresentable, Codable {
@@ -142,24 +141,5 @@ enum EmotionType: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
         case .loneliness:
             return "😞"
         }
-    }
-}
-
-@Model
-final class Emotion: Identifiable {
-    var id: UUID
-    var emotionType: EmotionType
-    var childActions: [String]
-    var parentActions: [String]
-    var notes: String
-    var timestamp: Date
-
-    init(emotionType: EmotionType, childActions: [String], parentActions: [String], notes: String) {
-        self.id = UUID()
-        self.emotionType = emotionType
-        self.childActions = childActions
-        self.parentActions = parentActions
-        self.notes = notes
-        self.timestamp = Date()
     }
 }

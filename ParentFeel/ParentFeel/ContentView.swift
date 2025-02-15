@@ -15,8 +15,8 @@ struct ContentView: View {
                     NavigationLink {
                         VStack(alignment: .leading) {
                             Text("Emotion: \(emotion.emotionType.displayText)")
-                            Text("Child Actions: \(emotion.childActions.joined(separator: ", "))")
-                            Text("Parent Actions: \(emotion.parentActions.joined(separator: ", "))")
+                            Text("Child Actions: ")
+                            Text("Parent Actions: ")
                             Text("Notes: \(emotion.notes)")
                             Text("Timestamp: \(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
                         }
