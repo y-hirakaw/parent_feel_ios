@@ -93,3 +93,5 @@ iOSInjectionProject/
 
 .vscode/
 buildServer.json
+
+.DS_Store

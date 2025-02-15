@@ -3,50 +3,56 @@ import SwiftData
 import Inject
 
 struct ContentView: View {
-@ObserveInjection var inject
+    @ObserveInjection var inject
 
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var emotions: [Emotion]
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(emotions) { emotion in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        VStack(alignment: .leading) {
+                            Text("Emotion: \(emotion.emotionType)")
+                            Text("Child Actions: \(emotion.childActions.joined(separator: ", "))")
+                            Text("Parent Actions: \(emotion.parentActions.joined(separator: ", "))")
+                            Text("Notes: \(emotion.notes)")
+                            Text("Timestamp: \(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        }
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        HStack {
+                            Text(emotion.emotionType)
+                            Spacer()
+                            Text(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteEmotions)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    NavigationLink(destination: EmotionInputView()) {
+                        Label("Add Emotion", systemImage: "plus")
                     }
                 }
             }
         } detail: {
-            Text("Select an item")
+            Text("Select an emotion")
+        }
+        .onAppear {
+            print("Emotions: \(emotions)")
         }
         .enableInjection()
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteEmotions(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(emotions[index])
             }
         }
     }
@@ -54,5 +60,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Emotion.self, inMemory: true)
 }
