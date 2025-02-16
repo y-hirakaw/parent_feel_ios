@@ -3,6 +3,8 @@ import SwiftData
 
 @main
 struct ParentFeelApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Emotion.self
