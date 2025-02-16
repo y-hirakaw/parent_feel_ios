@@ -4,6 +4,7 @@ import SwiftData
 struct EmotionInputView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Binding var path: NavigationPath
     @State private var selectedEmotion: EmotionType
     @State private var selectedChildActions: Set<ChildActionType>
     @State private var selectedParentActions: Set<ParentActionType>
@@ -14,7 +15,8 @@ struct EmotionInputView: View {
     let categories = EmotionCategory.allCases
     private var emotion: Emotion?
 
-    init(emotion: Emotion? = nil) {
+    init(emotion: Emotion? = nil, path: Binding<NavigationPath>) {
+        self._path = path
         if let emotion = emotion {
             self._selectedEmotion = State(initialValue: emotion.emotionType)
             self._selectedChildActions = State(initialValue: Set(emotion.childActions))
@@ -171,11 +173,11 @@ struct EmotionInputView: View {
             )
             modelContext.insert(newEmotion)
         }
-        dismiss()
+        path.removeLast()
     }
 }
 
 #Preview {
-    EmotionInputView()
+    EmotionInputView(path: .constant(NavigationPath()))
         .modelContainer(for: Emotion.self, inMemory: true)
 }

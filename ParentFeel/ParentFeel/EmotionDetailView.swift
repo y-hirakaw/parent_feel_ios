@@ -2,23 +2,26 @@ import SwiftUI
 
 struct EmotionDetailView: View {
     let emotion: Emotion
+    @Binding var path: NavigationPath
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                detailRow(title: "起きた感情", content: "\(emotion.emotionType.emoji) \(emotion.emotionType.displayText)")
-                detailRow(title: "子どもの行動", content: emotion.childActions.map { $0.displayText }.joined(separator: ", "))
-                detailRow(title: "自分の行動", content: emotion.parentActions.map { $0.displayText }.joined(separator: ", "))
-                detailRow(title: "メモ", content: emotion.notes, multiline: true)
-                detailRow(title: "保存時間", content: emotion.timestamp.formatted(date: .numeric, time: .shortened))
+        Group {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    detailRow(title: "起きた感情", content: "\(emotion.emotionType.emoji) \(emotion.emotionType.displayText)")
+                    detailRow(title: "子どもの行動", content: emotion.childActions.map { $0.displayText }.joined(separator: ", "))
+                    detailRow(title: "自分の行動", content: emotion.parentActions.map { $0.displayText }.joined(separator: ", "))
+                    detailRow(title: "メモ", content: emotion.notes, multiline: true)
+                    detailRow(title: "保存時間", content: emotion.timestamp.formatted(date: .numeric, time: .shortened))
+                }
+                .padding()
             }
-            .padding()
-        }
-        .navigationTitle("感情詳細")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: EmotionInputView(emotion: emotion)) {
-                    Text("編集")
+            .navigationTitle("感情詳細")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(value: Screen.input(emotion)) {
+                        Text("編集")
+                    }
                 }
             }
         }

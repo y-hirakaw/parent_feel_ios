@@ -4,15 +4,16 @@ import Inject
 
 struct HomeView: View {
     @ObserveInjection var inject
+    @State private var path = NavigationPath()
 
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Emotion.timestamp, order: .reverse) private var emotions: [Emotion]
 
     var body: some View {
-        NavigationSplitView {
+        NavigationStack(path: $path) {
             List {
                 ForEach(emotions) { emotion in
-                    NavigationLink(destination: EmotionDetailView(emotion: emotion)) {
+                    NavigationLink(value: Screen.detail(emotion)) {
                         HStack {
                             Text(emotion.emotionType.displayText)
                             Spacer()
@@ -27,13 +28,22 @@ struct HomeView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    NavigationLink(destination: EmotionInputView()) {
+                    NavigationLink(value: Screen.input(nil)) {
                         Label("感情追加", systemImage: "plus")
                     }
                 }
             }
-        } detail: {
-            Text("感情を追加するか、選択してください。")
+            .navigationDestination(for: Screen.self) { path in
+                switch path {
+                case .input(let emotion):
+                    EmotionInputView(emotion: emotion, path: $path)
+                case .detail(let emotion):
+                    EmotionDetailView(emotion: emotion, path: $path)
+                case .home:
+                    Text("")
+                }
+            }
+            .navigationTitle("親の感情ノート")
         }
         .enableInjection()
     }
