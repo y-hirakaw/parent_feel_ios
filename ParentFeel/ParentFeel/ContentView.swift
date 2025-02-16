@@ -6,21 +6,13 @@ struct ContentView: View {
     @ObserveInjection var inject
 
     @Environment(\.modelContext) private var modelContext
-    @Query private var emotions: [Emotion]
+    @Query(sort: \Emotion.timestamp, order: .reverse) private var emotions: [Emotion]
 
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(emotions) { emotion in
-                    NavigationLink {
-                        VStack(alignment: .leading) {
-                            Text("Emotion: \(emotion.emotionType.displayText)")
-                            Text("Child Actions: ")
-                            Text("Parent Actions: ")
-                            Text("Notes: \(emotion.notes)")
-                            Text("Timestamp: \(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                        }
-                    } label: {
+                    NavigationLink(destination: EmotionDetailView(emotion: emotion)) {
                         HStack {
                             Text(emotion.emotionType.displayText)
                             Spacer()
