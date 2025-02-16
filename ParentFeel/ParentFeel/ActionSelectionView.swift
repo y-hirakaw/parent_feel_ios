@@ -15,10 +15,10 @@ struct ActionSelectionView<T: ActionType>: View {
                     }
                 }
             }
-            .navigationTitle("Select Actions")
+            .navigationTitle("行動を選択")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button("キャンセル") {
                         dismiss()
                     }
                 }

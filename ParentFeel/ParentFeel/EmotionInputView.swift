@@ -4,14 +4,30 @@ import SwiftData
 struct EmotionInputView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedEmotion: EmotionType = .affection
-    @State private var selectedChildActions: Set<ChildActionType> = []
-    @State private var selectedParentActions: Set<ParentActionType> = []
-    @State private var notes: String = ""
+    @State private var selectedEmotion: EmotionType
+    @State private var selectedChildActions: Set<ChildActionType>
+    @State private var selectedParentActions: Set<ParentActionType>
+    @State private var notes: String
     @State private var isChildActionModalPresented = false
     @State private var isParentActionModalPresented = false
 
     let categories = EmotionCategory.allCases
+    private var emotion: Emotion?
+
+    init(emotion: Emotion? = nil) {
+        if let emotion = emotion {
+            self._selectedEmotion = State(initialValue: emotion.emotionType)
+            self._selectedChildActions = State(initialValue: Set(emotion.childActions))
+            self._selectedParentActions = State(initialValue: Set(emotion.parentActions))
+            self._notes = State(initialValue: emotion.notes)
+            self.emotion = emotion
+        } else {
+            self._selectedEmotion = State(initialValue: .affection)
+            self._selectedChildActions = State(initialValue: [])
+            self._selectedParentActions = State(initialValue: [])
+            self._notes = State(initialValue: "")
+        }
+    }
 
     var body: some View {
         VStack {
@@ -136,18 +152,25 @@ struct EmotionInputView: View {
             }
             .padding()
         }
+        .navigationTitle("感情記録")
     }
 
     private func saveEmotion() {
-        let newEmotion = Emotion(
-            emotionType: selectedEmotion,
-            childActions: selectedChildActions.compactMap { ChildActionType(rawValue: $0.rawValue) },
-            parentActions: selectedParentActions
-                .compactMap { ParentActionType(rawValue: $0.rawValue) },
-            notes: notes
-        )
-        modelContext.insert(newEmotion)
-        print("Emotion saved: \(newEmotion.emotionType.rawValue)")
+        if let emotion = emotion {
+            emotion.emotionType = selectedEmotion
+            emotion.childActions = selectedChildActions.compactMap { ChildActionType(rawValue: $0.rawValue) }
+            emotion.parentActions = selectedParentActions.compactMap { ParentActionType(rawValue: $0.rawValue) }
+            emotion.notes = notes
+            try? modelContext.save()
+        } else {
+            let newEmotion = Emotion(
+                emotionType: selectedEmotion,
+                childActions: selectedChildActions.compactMap { ChildActionType(rawValue: $0.rawValue) },
+                parentActions: selectedParentActions.compactMap { ParentActionType(rawValue: $0.rawValue) },
+                notes: notes
+            )
+            modelContext.insert(newEmotion)
+        }
         dismiss()
     }
 }

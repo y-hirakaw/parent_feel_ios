@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 import Inject
 
-struct ContentView: View {
+struct HomeView: View {
     @ObserveInjection var inject
 
     @Environment(\.modelContext) private var modelContext
@@ -28,15 +28,12 @@ struct ContentView: View {
                 }
                 ToolbarItem {
                     NavigationLink(destination: EmotionInputView()) {
-                        Label("Add Emotion", systemImage: "plus")
+                        Label("感情追加", systemImage: "plus")
                     }
                 }
             }
         } detail: {
-            Text("Select an emotion")
-        }
-        .onAppear {
-            print("Emotions: \(emotions)")
+            Text("感情を追加するか、選択してください。")
         }
         .enableInjection()
     }
@@ -51,6 +48,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
         .modelContainer(for: Emotion.self, inMemory: true)
 }
