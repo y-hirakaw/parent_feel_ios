@@ -15,6 +15,7 @@ struct HomeView: View {
                 ForEach(emotions) { emotion in
                     NavigationLink(value: Screen.detail(emotion)) {
                         HStack {
+                            Text(emotion.emotionType.emoji)
                             Text(emotion.emotionType.displayText)
                             Spacer()
                             Text(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
