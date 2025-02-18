@@ -29,29 +29,29 @@ enum ParentActionType: Int, ActionType, CaseIterable, Identifiable, RawRepresent
 
     var displayText: String {
         switch self {
-        case .scolding: return "叱る"
-        case .ignoring: return "無視する"
-        case .explaining: return "説明する"
-        case .hugging: return "抱きしめる"
-        case .gettingAngry: return "怒る"
-        case .sighing: return "ため息をつく"
-        case .forcing: return "強制する"
-        case .comforting: return "なだめる"
-        case .givingIn: return "言うことを聞く"
-        case .threatening: return "脅す"
-        case .punishing: return "罰を与える"
-        case .negotiating: return "交渉する"
-        case .praising: return "褒める"
-        case .apologizing: return "謝る"
-        case .walkingAway: return "立ち去る"
-        case .changingTopic: return "話題を変える"
-        case .consulting: return "誰かに相談する"
-        case .gettingSilent: return "黙る"
-        case .encouraging: return "励ます"
-        case .listening: return "話を聞く"
-        case .appreciating: return "感謝を伝える"
-        case .supporting: return "サポートする"
-        case .playingTogether: return "一緒に遊ぶ"
+        case .scolding: return String(localized: "叱る")
+        case .ignoring: return String(localized: "無視する")
+        case .explaining: return String(localized: "説明する")
+        case .hugging: return String(localized: "抱きしめる")
+        case .gettingAngry: return String(localized: "怒る")
+        case .sighing: return String(localized: "ため息をつく")
+        case .forcing: return String(localized: "強制する")
+        case .comforting: return String(localized: "なだめる")
+        case .givingIn: return String(localized: "言うことを聞く")
+        case .threatening: return String(localized: "脅す")
+        case .punishing: return String(localized: "罰を与える")
+        case .negotiating: return String(localized: "交渉する")
+        case .praising: return String(localized: "褒める")
+        case .apologizing: return String(localized: "謝る")
+        case .walkingAway: return String(localized: "立ち去る")
+        case .changingTopic: return String(localized: "話題を変える")
+        case .consulting: return String(localized: "誰かに相談する")
+        case .gettingSilent: return String(localized: "黙る")
+        case .encouraging: return String(localized: "励ます")
+        case .listening: return String(localized: "話を聞く")
+        case .appreciating: return String(localized: "感謝を伝える")
+        case .supporting: return String(localized: "サポートする")
+        case .playingTogether: return String(localized: "一緒に遊ぶ")
         }
     }
 }

@@ -1,14 +1,14 @@
 import Foundation
 
-enum EmotionCategory: String, CaseIterable, Identifiable, RawRepresentable, Codable {
-    case positive = "肯定的感情"
-    case negative = "否定的感情"
-    case protective = "保護的感情"
-    case selfReflective = "自己反省的感情"
-    case anticipatory = "期待的感情"
-    case complex = "複雑な感情"
+enum EmotionCategory: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
+    case positive
+    case negative
+    case protective
+    case selfReflective
+    case anticipatory
+    case complex
 
-    var id: String { self.rawValue }
+    var id: Int { self.rawValue }
 
     var emotions: [EmotionType] {
         switch self {
@@ -24,6 +24,23 @@ enum EmotionCategory: String, CaseIterable, Identifiable, RawRepresentable, Coda
             return [.hope, .expectation, .excitement]
         case .complex:
             return [.jealousy, .confusion, .loneliness]
+        }
+    }
+
+    var displayText: String {
+        switch self {
+        case .positive:
+            return String(localized: "肯定的感情")
+        case .negative:
+            return String(localized: "否定的感情")
+        case .protective:
+            return String(localized: "保護的感情")
+        case .selfReflective:
+            return String(localized: "自己反省的感情")
+        case .anticipatory:
+            return String(localized: "期待的感情")
+        case .complex:
+            return String(localized: "複雑な感情")
         }
     }
 }
@@ -64,41 +81,41 @@ enum EmotionType: Int, CaseIterable, Identifiable, RawRepresentable, Codable {
     var displayText: String {
         switch self {
         case .affection:
-            return "愛情"
+            return String(localized: "愛情")
         case .joy:
-            return "喜び"
+            return String(localized: "喜び")
         case .pride:
-            return "誇り"
+            return String(localized: "誇り")
         case .anger:
-            return "怒り"
+            return String(localized: "怒り")
         case .sadness:
-            return "悲しみ"
+            return String(localized: "悲しみ")
         case .disappointment:
-            return "失望"
+            return String(localized: "失望")
         case .anxiety:
-            return "不安"
+            return String(localized: "不安")
         case .worry:
-            return "心配"
+            return String(localized: "心配")
         case .fear:
-            return "恐れ"
+            return String(localized: "恐れ")
         case .guilt:
-            return "罪悪感"
+            return String(localized: "罪悪感")
         case .regret:
-            return "後悔"
+            return String(localized: "後悔")
         case .impatience:
-            return "焦り"
+            return String(localized: "焦り")
         case .hope:
-            return "希望"
+            return String(localized: "希望")
         case .expectation:
-            return "期待"
+            return String(localized: "期待")
         case .excitement:
-            return "興奮"
+            return String(localized: "興奮")
         case .jealousy:
-            return "嫉妬"
+            return String(localized: "嫉妬")
         case .confusion:
-            return "戸惑い"
+            return String(localized: "戸惑い")
         case .loneliness:
-            return "寂しさ"
+            return String(localized: "寂しさ")
         }
     }
 

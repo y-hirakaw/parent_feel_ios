@@ -40,7 +40,7 @@ struct EmotionInputView: View {
                         .padding(.horizontal)
                     ForEach(categories) { category in
                         VStack(alignment: .leading) {
-                            Text(category.rawValue)
+                            Text(category.displayText)
                                 .font(.subheadline)
                                 .padding(.horizontal)
 

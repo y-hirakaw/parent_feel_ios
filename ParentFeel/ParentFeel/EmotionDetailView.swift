@@ -8,11 +8,11 @@ struct EmotionDetailView: View {
         Group {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    detailRow(title: "起きた感情", content: "\(emotion.emotionType.emoji) \(emotion.emotionType.displayText)")
-                    detailRow(title: "子どもの行動", content: emotion.childActions.map { $0.displayText }.joined(separator: ", "))
-                    detailRow(title: "自分の行動", content: emotion.parentActions.map { $0.displayText }.joined(separator: ", "))
-                    detailRow(title: "メモ", content: emotion.notes, multiline: true)
-                    detailRow(title: "保存時間", content: emotion.timestamp.formatted(date: .numeric, time: .shortened))
+                    detailRow(title: String(localized: "起きた感情"), content: "\(emotion.emotionType.emoji) \(emotion.emotionType.displayText)")
+                    detailRow(title: String(localized: "子どもの行動"), content: emotion.childActions.map { $0.displayText }.joined(separator: ", "))
+                    detailRow(title: String(localized: "自分の行動"), content: emotion.parentActions.map { $0.displayText }.joined(separator: ", "))
+                    detailRow(title: String(localized: "メモ"), content: emotion.notes, multiline: true)
+                    detailRow(title: String(localized: "保存時間"), content: emotion.timestamp.formatted(date: .numeric, time: .shortened))
                 }
                 .padding()
             }
