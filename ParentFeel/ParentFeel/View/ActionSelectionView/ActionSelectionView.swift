@@ -4,15 +4,13 @@ struct ActionSelectionView<T: ActionType>: View {
     @Binding var selectedActions: Set<T>
     @Environment(\.dismiss) private var dismiss
 
+    @StateObject private var viewState = ActionSelectionViewState<T>()
+
     var body: some View {
         NavigationView {
             List(Array(T.allCases), id: \.self) { action in
-                MultipleSelectionRow(action: action, isSelected: selectedActions.contains(action)) {
-                    if selectedActions.contains(action) {
-                        selectedActions.remove(action)
-                    } else {
-                        selectedActions.insert(action)
-                    }
+                MultipleSelectionRow(action: action, isSelected: viewState.contains(action)) {
+                    viewState.toggle(action)
                 }
             }
             .navigationTitle("行動を選択")
@@ -24,28 +22,14 @@ struct ActionSelectionView<T: ActionType>: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("OK") {
+                        selectedActions = viewState.selectedActions
                         dismiss()
                     }
                 }
             }
         }
-    }
-}
-
-struct MultipleSelectionRow<T: ActionType>: View {
-    var action: T
-    var isSelected: Bool
-    var actionTapped: () -> Void
-
-    var body: some View {
-        Button(action: actionTapped) {
-            HStack {
-                Text(action.displayText)
-                if isSelected {
-                    Spacer()
-                    Image(systemName: "checkmark")
-                }
-            }
+        .onAppear {
+            viewState.selectedActions = selectedActions
         }
     }
 }
