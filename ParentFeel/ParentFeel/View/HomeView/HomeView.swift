@@ -4,13 +4,23 @@ import Inject
 
 struct HomeView: View {
     @ObserveInjection var inject
-    @State private var path = NavigationPath()
-
+    @StateObject private var viewState: HomeViewState
+    
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Emotion.timestamp, order: .reverse) private var emotions: [Emotion]
-
+    
+    init() {
+        // SwiftUIプレビュー用に初期化
+        let modelContext = try! ModelContainer(for: Emotion.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true)).mainContext
+        _viewState = StateObject(wrappedValue: HomeViewState(modelContext: modelContext))
+    }
+    
+    init(modelContext: ModelContext) {
+        _viewState = StateObject(wrappedValue: HomeViewState(modelContext: modelContext))
+    }
+    
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $viewState.path) {
             List {
                 ForEach(emotions) { emotion in
                     NavigationLink(value: Screen.detail(emotion)) {
@@ -22,7 +32,9 @@ struct HomeView: View {
                         }
                     }
                 }
-                .onDelete(perform: deleteEmotions)
+                .onDelete(perform: { offsets in
+                    viewState.deleteEmotions(emotions: emotions, offsets: offsets)
+                })
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -37,24 +49,19 @@ struct HomeView: View {
             .navigationDestination(for: Screen.self) { path in
                 switch path {
                 case .input(let emotion):
-                    EmotionInputView(emotion: emotion, path: $path)
+                    EmotionInputView(emotion: emotion, path: $viewState.path)
                 case .detail(let emotion):
-                    EmotionDetailView(emotion: emotion, path: $path)
+                    EmotionDetailView(emotion: emotion, path: $viewState.path)
                 case .home:
                     Text("")
                 }
             }
             .navigationTitle("親の感情ノート")
-        }
-        .enableInjection()
-    }
-
-    private func deleteEmotions(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(emotions[index])
+            .onAppear {
+                viewState.updateModelContext(modelContext)
             }
         }
+        .enableInjection()
     }
 }
 
