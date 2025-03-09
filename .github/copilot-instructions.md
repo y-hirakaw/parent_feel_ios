@@ -29,3 +29,16 @@ xcodebuild -scheme ParentFeel \
   -only-testing:ParentFeelTests test \
   -verbose | xcbeautify
 ```
+
+
+# PRのレビューコメント取得について
+
+以下の方法で取得してください。
+
+```
+% gh api repos/{owner}/{repo}/pulls/{pull_number}/reviews
+% gh api repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments
+```
+
+{owner}=y-hirakaw
+{repo}=parent_feel_ios
