@@ -12,6 +12,7 @@
       }
     },
     "OK" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -112,6 +113,7 @@
       }
     },
     "メモ(任意)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -284,6 +286,9 @@
         }
       }
     },
+    "変更する" : {
+
+    },
     "失望" : {
       "localizations" : {
         "en" : {
@@ -315,6 +320,7 @@
       }
     },
     "子どもの行動(任意)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -678,6 +684,7 @@
       }
     },
     "自分の行動(任意)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
