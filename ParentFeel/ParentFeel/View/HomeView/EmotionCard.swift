@@ -2,41 +2,16 @@ import SwiftUI
 import SwiftData
 
 struct EmotionCard: View {
-    let emotion: Emotion
-    @State private var isPressed = false
+    @StateObject private var viewState: EmotionCardViewState
     
-    // 感情カテゴリに基づいて背景色を取得
-    private func backgroundColor(for emotionType: EmotionType) -> Color {
-        switch getCategory(for: emotionType) {
-        case .positive:
-            return Color.green.opacity(0.2)
-        case .negative:
-            return Color.red.opacity(0.2)
-        case .protective:
-            return Color.blue.opacity(0.2)
-        case .selfReflective:
-            return Color.purple.opacity(0.2)
-        case .anticipatory:
-            return Color.yellow.opacity(0.2)
-        case .complex:
-            return Color.orange.opacity(0.2)
-        }
-    }
-    
-    // 感情タイプからカテゴリを取得
-    private func getCategory(for emotionType: EmotionType) -> EmotionCategory {
-        for category in EmotionCategory.allCases {
-            if category.emotions.contains(emotionType) {
-                return category
-            }
-        }
-        return .complex // デフォルト
+    init(emotion: Emotion) {
+        _viewState = StateObject(wrappedValue: EmotionCardViewState(emotion: emotion))
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center) {
-                Text(emotion.emotionType.emoji)
+                Text(viewState.emotion.emotionType.emoji)
                     .font(.system(size: 40))
                     .padding(8)
                     .background(
@@ -45,11 +20,11 @@ struct EmotionCard: View {
                     )
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(emotion.emotionType.displayText)
+                    Text(viewState.emotion.emotionType.displayText)
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text(getCategory(for: emotion.emotionType).displayText)
+                    Text(viewState.getCategory(for: viewState.emotion.emotionType).displayText)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -57,18 +32,18 @@ struct EmotionCard: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text(formattedDate(emotion.timestamp))
+                    Text(viewState.formattedDate(viewState.emotion.timestamp))
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
-                    Text(formattedTime(emotion.timestamp))
+                    Text(viewState.formattedTime(viewState.emotion.timestamp))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
             }
             
-            if !emotion.notes.isEmpty {
-                Text(emotion.notes)
+            if !viewState.emotion.notes.isEmpty {
+                Text(viewState.emotion.notes)
                     .font(.body)
                     .lineLimit(2)
                     .padding(.top, 4)
@@ -77,33 +52,15 @@ struct EmotionCard: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(backgroundColor(for: emotion.emotionType))
+                .fill(viewState.backgroundColor(for: viewState.emotion.emotionType))
                 .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
         )
-        .scaleEffect(isPressed ? 0.98 : 1.0)
-        .animation(.spring(response: 0.3), value: isPressed)
+        .scaleEffect(viewState.isPressed ? 0.98 : 1.0)
+        .animation(.spring(response: 0.3), value: viewState.isPressed)
         .onLongPressGesture(minimumDuration: 0.5, pressing: { pressing in
-            isPressed = pressing
+            viewState.updatePressState(pressing)
         }) {
             // 長押し完了時のアクション
         }
-    }
-    
-    // 日付フォーマット関数
-    private func formattedDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        formatter.locale = Locale(identifier: "ja_JP")
-        return formatter.string(from: date)
-    }
-    
-    // 時間フォーマット関数
-    private func formattedTime(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "ja_JP")
-        return formatter.string(from: date)
     }
 }
