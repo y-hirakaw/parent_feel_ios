@@ -2,7 +2,7 @@ import Testing
 import SwiftUI
 @testable import ParentFeel
 
-@Suite("ActionSelectionViewState Tests")
+@Suite("ActionSelectionViewState Tests", .serialized)
 struct ActionSelectionViewStateTests {
     // テスト用のUserDefaultsキーを作成（本番のデータを汚さないため）
     private static let testUserDefaultsSuite = "test_action_selection_view_state"
