@@ -17,7 +17,7 @@
 xcodebuild -scheme ParentFeel \
   -configuration Debug \
   -workspace ParentFeel/ParentFeel.xcodeproj/project.xcworkspace \
-  -destination 'id=E19EB9AB-3138-4B2A-8674-3173C8F0C0C5' \
+  -destination 'id=B3F517A2-0287-4161-9C05-0C71FA26DF92' \
   -allowProvisioningUpdates build | xcbeautify
 ```
 * テストの実行は以下のコマンドで行ってください。
@@ -25,7 +25,7 @@ xcodebuild -scheme ParentFeel \
 xcodebuild -scheme ParentFeel \
   -configuration Debug \
   -workspace ParentFeel/ParentFeel.xcodeproj/project.xcworkspace \
-  -destination 'id=E19EB9AB-3138-4B2A-8674-3173C8F0C0C5' \
+  -destination 'id=B3F517A2-0287-4161-9C05-0C71FA26DF92' \
   -destination-timeout 60 \
   -only-testing:ParentFeelTests test \
   -verbose | xcbeautify
