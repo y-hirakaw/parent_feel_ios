@@ -1,8 +1,8 @@
 # 要件
 
-* コードを追加・修正した場合はビルドしてコンパイルエラーが発生していないか確認し、エラーがある場合は解消してから再度ビルドして確かめてください。
+* コードを追加した場合はビルドしてコンパイルエラーが発生していないか確認し、エラーがある場合は解消してから再度ビルドして確かめてください。
 * テストコードはswift-testingで書いてください。
-* テストコードを追加・修正した場合はテストを実行してエラーが発生していないか確認し、エラーがある場合は解消してから再度ビルドして確かめてください。
+* 既存コードの修正、テストコードを追加・修正した場合はテストを実行してエラーが発生していないか確認し、エラーがある場合は解消してから再度ビルドして確かめてください。
 
 # このアプリで利用されているSVVSアーキテクチャについての説明
   
@@ -16,15 +16,16 @@
 xcodebuild -scheme ParentFeel \
   -configuration Debug \
   -workspace ParentFeel/ParentFeel.xcodeproj/project.xcworkspace \
-  -destination 'platform=iOS Simulator,name=iPhone 16' \
+  -destination 'id=E19EB9AB-3138-4B2A-8674-3173C8F0C0C5' \
   -allowProvisioningUpdates build | xcbeautify
 ```
-* テストは以下のコマンドで行ってください。
+* テストの実行は以下のコマンドで行ってください。
 ```
 xcodebuild -scheme ParentFeel \
   -configuration Debug \
   -workspace ParentFeel/ParentFeel.xcodeproj/project.xcworkspace \
-  -destination 'platform=iOS Simulator,name=iPhone 16' \
-  -allowProvisioningUpdates \
-  -only-testing:ParentFeelTests test | xcbeautify
+  -destination 'id=E19EB9AB-3138-4B2A-8674-3173C8F0C0C5' \
+  -destination-timeout 60 \
+  -only-testing:ParentFeelTests test \
+  -verbose | xcbeautify
 ```

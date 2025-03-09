@@ -38,6 +38,7 @@
 		66D8B9DE2D601B010051108A /* ParentFeel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParentFeel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66D8B9F02D601B030051108A /* ParentFeelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParentFeelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66D8B9FA2D601B030051108A /* ParentFeelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParentFeelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66F500122D7D0C78002F447F /* ParentFeel.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = ParentFeel.xctestplan; path = ../ParentFeel.xctestplan; sourceTree = "<group>"; };
 		66F578CA2D64BD4F00EAAE0F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		66F578CC2D64CDA700EAAE0F /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +93,7 @@
 		66D8B9D52D601B010051108A = {
 			isa = PBXGroup;
 			children = (
+				66F500122D7D0C78002F447F /* ParentFeel.xctestplan */,
 				66F578CC2D64CDA700EAAE0F /* InfoPlist.xcstrings */,
 				66F578CA2D64BD4F00EAAE0F /* Localizable.xcstrings */,
 				665CA74D2D636B1C00E7E143 /* GoogleService-Info.plist */,

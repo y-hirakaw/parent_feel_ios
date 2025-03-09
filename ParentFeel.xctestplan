@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "712F4DCC-DB04-40A4-ADBA-5E02DE44DF65",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ParentFeel.xcodeproj",
+      "identifier" : "66D8B9DD2D601B010051108A",
+      "name" : "ParentFeel"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:ParentFeel.xcodeproj",
+        "identifier" : "66D8B9EF2D601B030051108A",
+        "name" : "ParentFeelTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:ParentFeel.xcodeproj",
+        "identifier" : "66D8B9F92D601B030051108A",
+        "name" : "ParentFeelUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
