@@ -89,6 +89,13 @@ struct EmotionDetailView: View {
         }
     }
 
+    /// 詳細行を表示するためのカスタムビュー
+    /// - Parameters:
+    ///   - title: 行のタイトル
+    ///   - content: 表示するコンテンツ
+    ///   - systemImage: SF Symbolsのアイコン名
+    ///   - multiline: 複数行表示を許可するかどうか
+    /// - Returns: カスタマイズされた詳細行ビュー
     @ViewBuilder
     private func detailRow(title: String, content: String, systemImage: String, multiline: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 8) {
