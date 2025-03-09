@@ -42,6 +42,11 @@ class ActionSelectionViewState<T: ActionType>: ObservableObject {
         loadRecentActions()
     }
     
+    // テスト可能にするため、UserDefaultsを取得するメソッドを分離
+    func getUserDefaults() -> UserDefaults {
+        return UserDefaults.standard
+    }
+    
     // カテゴリの初期化
     private func setupCategories() {
         let allActions = Array(T.allCases)
@@ -114,13 +119,13 @@ class ActionSelectionViewState<T: ActionType>: ObservableObject {
     // 最近使用した行動を保存
     private func saveRecentActions() {
         if let encoded = try? JSONEncoder().encode(recentActions.map { $0.rawValue }) {
-            UserDefaults.standard.set(encoded, forKey: "recent\(T.self)Actions")
+            getUserDefaults().set(encoded, forKey: "recent\(T.self)Actions")
         }
     }
     
     // 最近使用した行動をロード
     private func loadRecentActions() {
-        if let data = UserDefaults.standard.data(forKey: "recent\(T.self)Actions"),
+        if let data = getUserDefaults().data(forKey: "recent\(T.self)Actions"),
            let decodedRawValues = try? JSONDecoder().decode([Int].self, from: data) {
             recentActions = decodedRawValues.compactMap { rawValue in
                 T.allCases.first { $0.rawValue == rawValue }
