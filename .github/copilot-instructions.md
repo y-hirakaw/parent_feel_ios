@@ -29,7 +29,7 @@ xcodebuild -scheme ParentFeel \
   -only-testing:ParentFeelTests test \
   -verbose | xcbeautify
 ```
-
+テスト実行時はビルド→テスト実行するので時間がかかります。実行時は最大2分程度待機してください。
 
 # PRのレビューコメント取得について
 
