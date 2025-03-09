@@ -168,11 +168,11 @@ struct EmotionInputView: View {
                         .shadow(color: .blue.opacity(0.3), radius: 8, y: 4)
                 }
                 .padding(.horizontal)
-                .padding(.top)
+                .padding(.vertical)
                 .background(
                     Rectangle()
                         .fill(.background)
-                        .shadow(color: .black.opacity(0.1), radius: 8, y: -4)
+                        .shadow(color: .black.opacity(0.1), radius: 8, y: 8)
                 )
             }
             .ignoresSafeArea(.keyboard)
