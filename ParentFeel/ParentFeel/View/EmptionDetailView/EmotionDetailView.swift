@@ -12,10 +12,9 @@ struct EmotionDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 感情セクション
                 VStack(alignment: .leading, spacing: 16) {
                     Text(viewState.emotion.emotionType.emoji)
-                        .font(.system(size: 40))  // サイズを60から40に変更
+                        .font(.system(size: 40))
                         .padding(16)
                         .background(
                             Circle()
@@ -35,7 +34,6 @@ struct EmotionDetailView: View {
                         .fill(Color.blue.opacity(0.1))
                 )
                 
-                // 行動セクション
                 VStack(alignment: .leading, spacing: 16) {
                     detailRow(
                         title: String(localized: "子どもの行動"),
@@ -55,7 +53,6 @@ struct EmotionDetailView: View {
                         .fill(Color.gray.opacity(0.05))
                 )
                 
-                // メモと時間セクション
                 VStack(alignment: .leading, spacing: 16) {
                     if !viewState.notesText.isEmpty {
                         detailRow(
