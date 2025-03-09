@@ -10,39 +10,104 @@ struct EmotionDetailView: View {
     }
 
     var body: some View {
-        Group {
-            ScrollView {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                // 感情セクション
                 VStack(alignment: .leading, spacing: 16) {
-                    detailRow(title: String(localized: "起きた感情"), content: viewState.emotionTypeText)
-                    detailRow(title: String(localized: "子どもの行動"), content: viewState.childActionsText)
-                    detailRow(title: String(localized: "自分の行動"), content: viewState.parentActionsText)
-                    detailRow(title: String(localized: "メモ"), content: viewState.notesText, multiline: true)
-                    detailRow(title: String(localized: "保存時間"), content: viewState.timestampText)
+                    Text(viewState.emotion.emotionType.emoji)
+                        .font(.system(size: 40))  // サイズを60から40に変更
+                        .padding(16)
+                        .background(
+                            Circle()
+                                .fill(Color.white.opacity(0.8))
+                                .shadow(color: .black.opacity(0.1), radius: 8)
+                        )
+                    
+                    detailRow(
+                        title: String(localized: "起きた感情"),
+                        content: viewState.emotionTypeText,
+                        systemImage: "heart.fill"
+                    )
                 }
-                .padding()
-            }
-            .navigationTitle("感情詳細")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(value: Screen.input(viewState.emotion)) {
-                        Text("編集")
+                .padding(20)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.blue.opacity(0.1))
+                )
+                
+                // 行動セクション
+                VStack(alignment: .leading, spacing: 16) {
+                    detailRow(
+                        title: String(localized: "子どもの行動"),
+                        content: viewState.childActionsText,
+                        systemImage: "person.2.fill"
+                    )
+                    
+                    detailRow(
+                        title: String(localized: "自分の行動"),
+                        content: viewState.parentActionsText,
+                        systemImage: "person.fill"
+                    )
+                }
+                .padding(20)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.gray.opacity(0.05))
+                )
+                
+                // メモと時間セクション
+                VStack(alignment: .leading, spacing: 16) {
+                    if !viewState.notesText.isEmpty {
+                        detailRow(
+                            title: String(localized: "メモ"),
+                            content: viewState.notesText,
+                            systemImage: "note.text",
+                            multiline: true
+                        )
                     }
+                    
+                    detailRow(
+                        title: String(localized: "保存時間"),
+                        content: viewState.timestampText,
+                        systemImage: "clock.fill"
+                    )
+                }
+                .padding(20)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.gray.opacity(0.05))
+                )
+            }
+            .padding()
+        }
+        .navigationTitle("感情詳細")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(value: Screen.input(viewState.emotion)) {
+                    Text("編集")
+                        .fontWeight(.bold)
+                        .foregroundColor(.blue)
                 }
             }
         }
     }
 
     @ViewBuilder
-    private func detailRow(title: String, content: String, multiline: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.headline)
-                .foregroundColor(.secondary)
+    private func detailRow(title: String, content: String, systemImage: String, multiline: Bool = false) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                Image(systemName: systemImage)
+                    .foregroundColor(.blue)
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+            }
+            
             Text(content)
+                .font(.body)
                 .foregroundColor(.primary)
-                .multilineTextAlignment(multiline ? .leading : .trailing)
+                .frame(maxWidth: .infinity, alignment: multiline ? .leading : .leading)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.vertical, 8)
-        Divider()
     }
 }
