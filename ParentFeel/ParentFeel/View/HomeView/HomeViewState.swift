@@ -3,6 +3,7 @@ import SwiftData
 
 class HomeViewState: ObservableObject {
     @Published var path = NavigationPath()
+    @Published var isEditing = false
     
     private var modelContext: ModelContext
     
@@ -19,6 +20,12 @@ class HomeViewState: ObservableObject {
             for index in offsets {
                 modelContext.delete(emotions[index])
             }
+        }
+    }
+    
+    func deleteEmotion(emotion: Emotion) {
+        withAnimation {
+            modelContext.delete(emotion)
         }
     }
 }

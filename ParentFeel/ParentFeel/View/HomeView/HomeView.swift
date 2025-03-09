@@ -21,26 +21,60 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack(path: $viewState.path) {
-            List {
-                ForEach(emotions) { emotion in
-                    NavigationLink(value: Screen.detail(emotion)) {
-                        HStack {
-                            Text(emotion.emotionType.emoji)
-                            Text(emotion.emotionType.displayText)
-                            Spacer()
-                            Text(emotion.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+            Group {
+                if viewState.isEditing {
+                    List {
+                        ForEach(emotions) { emotion in
+                            EmotionCard(emotion: emotion)
+                                .onTapGesture {
+                                    viewState.path.append(Screen.detail(emotion))
+                                }
+                                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                                .listRowSeparator(.hidden)
+                        }
+                        .onDelete { indexSet in
+                            viewState.deleteEmotions(emotions: emotions, offsets: indexSet)
                         }
                     }
+                    .listStyle(.plain)
+                    .environment(\.editMode, .constant(.active))
+                    
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(emotions) { emotion in
+                                EmotionCard(emotion: emotion)
+                                    .onTapGesture {
+                                        viewState.path.append(Screen.detail(emotion))
+                                    }
+                                    .transition(.scale.combined(with: .opacity))
+                                    .contextMenu {
+                                        Button(role: .destructive) {
+                                            viewState.deleteEmotion(emotion: emotion)
+                                        } label: {
+                                            Label("削除", systemImage: "trash")
+                                        }
+                                    }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .padding(.vertical)
+                    }
                 }
-                .onDelete(perform: { offsets in
-                    viewState.deleteEmotions(emotions: emotions, offsets: offsets)
-                })
             }
+            .navigationTitle("親の感情ノート")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                    Button(action: {
+                        withAnimation {
+                            viewState.isEditing.toggle()
+                        }
+                    }) {
+                        Text(viewState.isEditing ? "完了" : "編集")
+                    }
                 }
-                ToolbarItem {
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(value: Screen.input(nil)) {
                         Label("感情追加", systemImage: "plus")
                     }
@@ -56,7 +90,6 @@ struct HomeView: View {
                     Text("")
                 }
             }
-            .navigationTitle("親の感情ノート")
             .onAppear {
                 viewState.updateModelContext(modelContext)
             }
