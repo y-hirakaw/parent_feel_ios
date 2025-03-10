@@ -4,6 +4,7 @@ import SwiftData
 class HomeViewState: ObservableObject {
     @Published var path = NavigationPath()
     @Published var isEditing = false
+    @Published var selectedTab = 0
     
     private var modelContext: ModelContext
     

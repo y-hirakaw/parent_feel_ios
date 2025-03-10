@@ -21,6 +21,9 @@
         }
       }
     },
+    "%@" : {
+
+    },
     "OK" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -28,6 +31,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "カテゴリー" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category"
           }
         }
       }
@@ -52,12 +65,33 @@
         }
       }
     },
+    "グラフ" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graph"
+          }
+        }
+      }
+    },
     "ここにメモを入力" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter memo here"
+          }
+        }
+      }
+    },
+    "この期間の記録はありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No records for this period"
           }
         }
       }
@@ -82,12 +116,32 @@
         }
       }
     },
+    "すべて" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        }
+      }
+    },
     "ため息をつく" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sigh"
+          }
+        }
+      }
+    },
+    "トレンド" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trends"
           }
         }
       }
@@ -102,12 +156,42 @@
         }
       }
     },
+    "ニュートラル" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutral"
+          }
+        }
+      }
+    },
+    "ネガティブ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negative"
+          }
+        }
+      }
+    },
     "ふざける" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joking around"
+          }
+        }
+      }
+    },
+    "ポジティブ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positive"
           }
         }
       }
@@ -213,6 +297,16 @@
         }
       }
     },
+    "最近使用" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent"
+          }
+        }
+      }
+    },
     "最近使用した行動はまだありません。\n行動を選択すると、ここに表示されます。" : {
       "localizations" : {
         "en" : {
@@ -309,6 +403,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lying"
+          }
+        }
+      }
+    },
+    "回数" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Count"
           }
         }
       }
@@ -474,6 +578,56 @@
         }
       }
     },
+    "感情" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion"
+          }
+        }
+      }
+    },
+    "感情カテゴリの推移" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion Category Trends"
+          }
+        }
+      }
+    },
+    "感情トレンド" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion Trends"
+          }
+        }
+      }
+    },
+    "感情の分布" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emotion Distribution"
+          }
+        }
+      }
+    },
+    "感情を記録すると、ここにトレンドが表示されます" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record emotions to see trends here"
+          }
+        }
+      }
+    },
     "感情記録" : {
       "localizations" : {
         "en" : {
@@ -554,6 +708,16 @@
         }
       }
     },
+    "日付" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        }
+      }
+    },
     "期待" : {
       "localizations" : {
         "en" : {
@@ -570,6 +734,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anticipatory"
+          }
+        }
+      }
+    },
+    "期間" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Period"
           }
         }
       }
@@ -862,6 +1036,16 @@
         }
       }
     },
+    "記録" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Records"
+          }
+        }
+      }
+    },
     "話を聞く" : {
       "localizations" : {
         "en" : {
@@ -978,56 +1162,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Concentrating"
-          }
-        }
-      }
-    },
-    "すべて" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All"
-          }
-        }
-      }
-    },
-    "ニュートラル" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neutral"
-          }
-        }
-      }
-    },
-    "ポジティブ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Positive"
-          }
-        }
-      }
-    },
-    "ネガティブ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Negative"
-          }
-        }
-      }
-    },
-    "最近使用" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recent"
           }
         }
       }
