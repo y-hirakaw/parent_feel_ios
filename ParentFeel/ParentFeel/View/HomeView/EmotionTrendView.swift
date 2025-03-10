@@ -32,11 +32,11 @@ struct EmotionGraphView: View {
         var localizedName: String {
             switch self {
             case .week:
-                return "1週間"
+                return String(localized: "1週間")
             case .month:
-                return "1ヶ月"
+                return String(localized: "1ヶ月")
             case .threeMonths:
-                return "3ヶ月"
+                return String(localized: "3ヶ月")
             case .all:
                 return String(localized: "すべて")
             }
@@ -145,6 +145,7 @@ struct EmotionGraphView: View {
                     .chartForegroundStyleScale(domain: EmotionCategory.allCases.map { $0.displayText })
                     .chartLegend(position: .bottom, alignment: .center)
                     .frame(height: 250)
+                    .id("categoryChart-\(timeRange)")
                 }
                 
                 Divider().padding(.vertical)
@@ -169,6 +170,7 @@ struct EmotionGraphView: View {
                     }
                     .chartLegend(position: .bottom)
                     .frame(height: 250)
+                    .id("distributionChart-\(timeRange)")
                 }
             }
         }

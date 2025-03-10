@@ -1165,6 +1165,36 @@
           }
         }
       }
+    },
+    "1週間" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Week"
+          }
+        }
+      }
+    },
+    "1ヶ月" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Month"
+          }
+        }
+      }
+    },
+    "3ヶ月" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Months"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
