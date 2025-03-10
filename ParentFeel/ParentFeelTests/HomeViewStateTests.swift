@@ -36,6 +36,31 @@ struct HomeViewStateTests {
         #expect(viewState.isEditing == false)
     }
     
+    @Test("selectedTab - defaults to 0")
+    func testSelectedTabDefaultValue() async throws {
+        // 準備
+        let (context, _) = try await MainActor.run { try createTestContext() }
+        
+        // 実行
+        let viewState = HomeViewState(modelContext: context)
+        
+        // 検証
+        #expect(viewState.selectedTab == 0)
+    }
+    
+    @Test("selectedTab - can be changed")
+    func testSelectedTabCanBeChanged() async throws {
+        // 準備
+        let (context, _) = try await MainActor.run { try createTestContext() }
+        let viewState = HomeViewState(modelContext: context)
+        
+        // 実行
+        viewState.selectedTab = 1
+        
+        // 検証
+        #expect(viewState.selectedTab == 1)
+    }
+    
     @Test("updateModelContext - updates the model context")
     func testUpdateModelContext() async throws {
         // 準備

@@ -20,6 +20,23 @@ struct HomeView: View {
     }
     
     var body: some View {
+        TabView(selection: $viewState.selectedTab) {
+            emotionListTab
+                .tabItem {
+                    Label("記録", systemImage: "heart.text.square")
+                }
+                .tag(0)
+            
+            EmotionTrendView()
+                .tabItem {
+                    Label("トレンド", systemImage: "chart.xyaxis.line")
+                }
+                .tag(1)
+        }
+        .enableInjection()
+    }
+    
+    private var emotionListTab: some View {
         NavigationStack(path: $viewState.path) {
             Group {
                 if viewState.isEditing {
@@ -94,7 +111,6 @@ struct HomeView: View {
                 viewState.updateModelContext(modelContext)
             }
         }
-        .enableInjection()
     }
 }
 
