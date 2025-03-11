@@ -171,7 +171,8 @@ struct EmotionInputView: View {
                 .padding(.vertical)
                 .background(
                     Rectangle()
-                        .fill(.background)
+                        .fill(Color.white)
+                        .ignoresSafeArea(edges: .bottom)
                         .shadow(color: .black.opacity(0.1), radius: 8, y: 8)
                 )
             }
