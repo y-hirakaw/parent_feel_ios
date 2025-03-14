@@ -62,6 +62,46 @@
         }
       }
     },
+    "ここに対応方法を入力" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your desired response here"
+          }
+        }
+      }
+    },
+    "ここに感じ方を入力" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter your feelings here"
+          }
+        }
+      }
+    },
+    "ここに過去の経験を入力" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter past experiences here"
+          }
+        }
+      }
+    },
+    "この感情を引き起こした自分の過去の経験は？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past experiences that triggered this emotion?"
+          }
+        }
+      }
+    },
     "サポートする" : {
       "localizations" : {
         "en" : {
@@ -78,6 +118,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sulking"
+          }
+        }
+      }
+    },
+    "すべて" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        }
+      }
+    },
+    "その経験をどう感じていた？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How did you feel about that experience?"
           }
         }
       }
@@ -102,12 +162,53 @@
         }
       }
     },
+    "ニュートラル" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutral"
+          }
+        }
+      }
+    },
+    "ネガティブ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negative"
+          }
+        }
+      }
+    },
     "ふざける" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joking around"
+          }
+        }
+      }
+    },
+    "ポジティブ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positive"
+          }
+        }
+      }
+    },
+    "ポジティブ / ネガティブ" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positive / Negative"
           }
         }
       }
@@ -173,6 +274,16 @@
         }
       }
     },
+    "今の子どもにはどう対応したい？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How would you like to respond to your child now?"
+          }
+        }
+      }
+    },
     "保存" : {
       "localizations" : {
         "en" : {
@@ -209,6 +320,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Being kind"
+          }
+        }
+      }
+    },
+    "最近使用" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent"
           }
         }
       }
@@ -348,7 +469,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Child’s behavior"
+            "value" : "Child's behavior"
           }
         }
       }
@@ -359,7 +480,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Child’s behavior (Optional)"
+            "value" : "Child's behavior (Optional)"
           }
         }
       }
@@ -765,6 +886,16 @@
         }
       }
     },
+    "自己振り返り" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Self-reflection"
+          }
+        }
+      }
+    },
     "興奮" : {
       "localizations" : {
         "en" : {
@@ -978,56 +1109,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Concentrating"
-          }
-        }
-      }
-    },
-    "すべて" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All"
-          }
-        }
-      }
-    },
-    "ニュートラル" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neutral"
-          }
-        }
-      }
-    },
-    "ポジティブ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Positive"
-          }
-        }
-      }
-    },
-    "ネガティブ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Negative"
-          }
-        }
-      }
-    },
-    "最近使用" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recent"
           }
         }
       }

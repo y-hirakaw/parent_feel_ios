@@ -19,6 +19,10 @@
 * SVVSでは、ViewのアクションがViewStateを通じてStoreに伝達されます。StoreはAPIやDBと通信し、シングルトンでデータを保持します。
 * Storeのデータ変更はViewStateを介してViewに反映され、単方向データフローを実現します。
 
+# テストコードについての補足
+
+* ViewStateのテストコードはstructの定義の上に`@MainActor`が必要です。
+
 # 動作確認について
 
 * ビルドは以下のコマンドで行ってください。
