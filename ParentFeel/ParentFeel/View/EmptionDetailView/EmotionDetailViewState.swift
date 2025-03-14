@@ -21,6 +21,29 @@ class EmotionDetailViewState: ObservableObject {
         emotion.parentActions.map { $0.displayText }.joined(separator: ", ")
     }
 
+    var pastExperienceText: String {
+        emotion.pastExperience
+    }
+
+    var pastExperienceFeelingText: String {
+        emotion.pastExperienceFeeling
+    }
+
+    var pastExperienceSentimentText: String {
+        switch emotion.pastExperienceSentiment {
+        case "positive":
+            return String(localized: "ポジティブ")
+        case "negative":
+            return String(localized: "ネガティブ")
+        default:
+            return ""
+        }
+    }
+
+    var desiredResponseText: String {
+        emotion.desiredResponse
+    }
+
     var notesText: String {
         emotion.notes
     }

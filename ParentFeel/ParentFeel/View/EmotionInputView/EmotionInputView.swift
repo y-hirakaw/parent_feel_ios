@@ -125,6 +125,119 @@ struct EmotionInputView: View {
                         }
                         .padding(.horizontal)
                     }
+                    
+                    // 自己振り返りセクション
+                    VStack(spacing: 24) {
+                        Text("自己振り返り")
+                            .font(.title2.bold())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                        
+                        // 過去の経験
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("この感情を引き起こした自分の過去の経験は？")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                            ZStack(alignment: .topLeading) {
+                                if viewState.pastExperience.isEmpty {
+                                    Text("ここに過去の経験を入力")
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 8)
+                                        .padding(.leading, 5)
+                                }
+
+                                TextEditor(text: $viewState.pastExperience)
+                                    .frame(minHeight: 100)
+                                    .scrollContentBackground(.hidden)
+                                    .background(Color.gray.opacity(0.1))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                        }
+                        .padding(.horizontal)
+                        
+                        // その経験の感じ方
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("その経験をどう感じていた？")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            // ポジティブ/ネガティブの選択
+                            HStack(spacing: 16) {
+                                Button(action: {
+                                    viewState.pastExperienceSentiment = "positive"
+                                }) {
+                                    HStack {
+                                        Image(systemName: viewState.pastExperienceSentiment == "positive" ? "checkmark.circle.fill" : "circle")
+                                            .foregroundColor(viewState.pastExperienceSentiment == "positive" ? .blue : .gray)
+                                        Text("ポジティブ")
+                                            .foregroundColor(viewState.pastExperienceSentiment == "positive" ? .blue : .primary)
+                                    }
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 12)
+                                    .background(viewState.pastExperienceSentiment == "positive" ? Color.blue.opacity(0.1) : Color.clear)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                }
+                                
+                                Button(action: {
+                                    viewState.pastExperienceSentiment = "negative"
+                                }) {
+                                    HStack {
+                                        Image(systemName: viewState.pastExperienceSentiment == "negative" ? "checkmark.circle.fill" : "circle")
+                                            .foregroundColor(viewState.pastExperienceSentiment == "negative" ? .blue : .gray)
+                                        Text("ネガティブ")
+                                            .foregroundColor(viewState.pastExperienceSentiment == "negative" ? .blue : .primary)
+                                    }
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 12)
+                                    .background(viewState.pastExperienceSentiment == "negative" ? Color.blue.opacity(0.1) : Color.clear)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                }
+                                
+                                Spacer()
+                            }
+                            
+                            ZStack(alignment: .topLeading) {
+                                if viewState.pastExperienceFeeling.isEmpty {
+                                    Text("ここに感じ方を入力")
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 8)
+                                        .padding(.leading, 5)
+                                }
+
+                                TextEditor(text: $viewState.pastExperienceFeeling)
+                                    .frame(minHeight: 100)
+                                    .scrollContentBackground(.hidden)
+                                    .background(Color.gray.opacity(0.1))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                        }
+                        .padding(.horizontal)
+                        
+                        // 子どもへの対応方法
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("今の子どもにはどう対応したい？")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                            ZStack(alignment: .topLeading) {
+                                if viewState.desiredResponse.isEmpty {
+                                    Text("ここに対応方法を入力")
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 8)
+                                        .padding(.leading, 5)
+                                }
+
+                                TextEditor(text: $viewState.desiredResponse)
+                                    .frame(minHeight: 100)
+                                    .scrollContentBackground(.hidden)
+                                    .background(Color.gray.opacity(0.1))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    .padding(.vertical)
 
                     // メモ欄
                     VStack(alignment: .leading, spacing: 12) {
