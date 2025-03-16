@@ -24,13 +24,21 @@ struct HomeView: View {
             Group {
                 if viewState.isEditing {
                     List {
-                        ForEach(emotions) { emotion in
-                            EmotionCard(emotion: emotion)
-                                .onTapGesture {
-                                    viewState.path.append(Screen.detail(emotion))
+                        ForEach(viewState.groupEmotionsByMonth(emotions)) { section in
+                            Section(
+                                header: Text(section.month.formatted(.dateTime.year().month(.wide)))
+                                    .font(.headline)
+                                    .foregroundStyle(.primary)
+                            ) {
+                                ForEach(section.emotions) { emotion in
+                                    EmotionCard(emotion: emotion)
+                                        .onTapGesture {
+                                            viewState.path.append(Screen.detail(emotion))
+                                        }
+                                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                                        .listRowSeparator(.hidden)
                                 }
-                                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                                .listRowSeparator(.hidden)
+                            }
                         }
                         .onDelete { indexSet in
                             viewState.deleteEmotions(emotions: emotions, offsets: indexSet)
@@ -41,20 +49,33 @@ struct HomeView: View {
                     
                 } else {
                     ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(emotions) { emotion in
-                                EmotionCard(emotion: emotion)
-                                    .onTapGesture {
-                                        viewState.path.append(Screen.detail(emotion))
+                        LazyVStack(spacing: 16, pinnedViews: .sectionHeaders) {
+                            ForEach(viewState.groupEmotionsByMonth(emotions)) { section in
+                                Section(
+                                    header: HStack {
+                                        Text(section.month.formatted(.dateTime.year().month(.wide)))
+                                            .font(.headline)
+                                            .padding(.horizontal)
+                                            .padding(.vertical, 8)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .background(.background)
                                     }
-                                    .transition(.scale.combined(with: .opacity))
-                                    .contextMenu {
-                                        Button(role: .destructive) {
-                                            viewState.deleteEmotion(emotion: emotion)
-                                        } label: {
-                                            Label("削除", systemImage: "trash")
-                                        }
+                                ) {
+                                    ForEach(section.emotions) { emotion in
+                                        EmotionCard(emotion: emotion)
+                                            .onTapGesture {
+                                                viewState.path.append(Screen.detail(emotion))
+                                            }
+                                            .transition(.scale.combined(with: .opacity))
+                                            .contextMenu {
+                                                Button(role: .destructive) {
+                                                    viewState.deleteEmotion(emotion: emotion)
+                                                } label: {
+                                                    Label("削除", systemImage: "trash")
+                                                }
+                                            }
                                     }
+                                }
                             }
                             .padding(.horizontal)
                         }
