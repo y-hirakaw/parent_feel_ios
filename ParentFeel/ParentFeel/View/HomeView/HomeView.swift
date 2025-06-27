@@ -85,6 +85,12 @@ struct HomeView: View {
             }
             .navigationTitle("親の感情ノート")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(value: Screen.analytics) {
+                        Label("分析", systemImage: "chart.bar")
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         withAnimation {
@@ -107,6 +113,8 @@ struct HomeView: View {
                     EmotionInputView(emotion: emotion, path: $viewState.path)
                 case .detail(let emotion):
                     EmotionDetailView(emotion: emotion, path: $viewState.path)
+                case .analytics:
+                    AnalyticsView()
                 case .home:
                     Text("")
                 }
