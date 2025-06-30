@@ -21,7 +21,16 @@ struct ParentFeelApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .onAppear {
+                    setupTestDataIfNeeded()
+                }
         }
         .modelContainer(sharedModelContainer)
+    }
+    
+    private func setupTestDataIfNeeded() {
+        #if DEBUG
+        TestDataGenerator.generateTestData(context: sharedModelContainer.mainContext)
+        #endif
     }
 }
